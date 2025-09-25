@@ -1,0 +1,888 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DX Exams — Amateur Radio Testing Made Easy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="description" content="DX Amateur Radio Exams — Professional, friendly amateur radio testing. $15 exam fee. All license classes available. Schedule your exam today!" />
+  <style>
+    .hero-gradient {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    }
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    }
+    .mobile-menu {
+      display: none;
+    }
+    .mobile-menu.active {
+      display: block;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-font {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+    }
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: white;
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    }
+    .modal-content::-webkit-scrollbar {
+      width: 8px;
+    }
+    .modal-content::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 4px;
+    }
+    .modal-content::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    .modal-content::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+  <!-- Header with custom image -->
+  <header class="relative overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="https://lh3.googleusercontent.com/sitesv/AICyYdZE75vVZ1oxLprJ99gLSMrYTFzG4LAmZ9Yyu1buhScmhBhU0YjbJ6qFBi_H5AmRGCJ3Wgrt0IvLuQ-oA4Q6PfjOO1Ur7BH3jNSnWUo7EeOcmJ6iTNkByhF_X1Bnne1O6BKsXiGao1NbIpBhaZtjHRVp_VHpox03NfbZYgN_-V7LZEMznxAm_mn6T_w=w16383" alt="DX Exams Header" class="w-full h-full object-cover object-center" />
+      <div class="absolute inset-0 bg-slate-900/70"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-6 py-6">
+      <nav class="flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3 z-10">
+          <div class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
+            <span class="text-2xl">📻</span>
+          </div>
+          <div>
+            <span class="font-bold text-2xl tracking-wide text-white">DX Exams</span>
+            <div class="text-amber-300 text-sm font-medium">KQ4DX</div>
+          </div>
+        </a>
+        
+        <div class="hidden md:flex gap-8 items-center">
+          <a href="#how" class="text-white hover:text-amber-300 transition font-medium">How It Works</a>
+          <a href="#pricing" class="text-white hover:text-amber-300 transition font-medium">Pricing</a>
+          <a href="#contact" class="text-white hover:text-amber-300 transition font-medium">Contact</a>
+          <button id="header-radio-btn" class="bg-slate-600 hover:bg-slate-700 text-white px-4 py-2 rounded-full transition flex items-center gap-2">
+            <i data-lucide="radio" class="w-4 h-4"></i> Join Exam
+          </button>
+        </div>
+        
+        <button id="mobile-toggle" class="md:hidden text-white p-2 rounded-md bg-white/10 backdrop-blur-sm">
+          <span class="block w-6 h-0.5 bg-white mb-1"></span>
+          <span class="block w-6 h-0.5 bg-white mb-1"></span>
+          <span class="block w-6 h-0.5 bg-white"></span>
+        </button>
+      </nav>
+      
+      <div id="mobile-menu" class="mobile-menu md:hidden mt-4 bg-white/10 backdrop-blur-sm rounded-lg p-4">
+        <a href="#how" class="block text-white hover:text-amber-300 py-2">How It Works</a>
+        <a href="#pricing" class="block text-white hover:text-amber-300 py-2">Pricing</a>
+        <a href="#contact" class="block text-white hover:text-amber-300 py-2">Contact</a>
+        <button id="mobile-radio-btn" class="block text-white hover:text-amber-300 py-2 bg-transparent border-none text-left">Join Exam</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-gradient text-white py-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-5xl lg:text-6xl font-bold leading-tight mb-6">
+            Amateur Radio
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">License Testing</span>
+            Made Simple
+          </h1>
+          <p class="text-xl text-slate-300 mb-8 leading-relaxed">
+            Professional, friendly testing for Technician, General, and Amateur Extra licenses. 
+            Get your ham radio license with experienced VEs in a comfortable environment.
+          </p>
+          
+          <div class="flex flex-col items-center gap-6 mb-10">
+            <button id="schedule-btn" class="btn-font bg-gradient-to-r from-amber-500 to-orange-600 text-white px-12 py-5 rounded-xl hover:from-amber-600 hover:to-orange-700 transition shadow-lg flex items-center justify-center text-lg">
+              Schedule
+            </button>
+          </div>
+          
+          <div class="text-center mb-12 space-y-8">
+            <a href="#how" class="btn-font inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white px-6 py-3 rounded-lg hover:bg-white/20 transition">
+              Learn More
+            </a>
+            <a href="mailto:kq4dx12@gmail.com?subject=Amateur%20Radio%20Exam%20Inquiry" class="btn-font inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white px-6 py-3 rounded-lg hover:bg-white/20 transition">
+              Contact Me
+            </a>
+          </div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center border border-white/20">
+              <div class="text-2xl mb-2">💰</div>
+              <div class="font-semibold">$15 Exam Fee</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center border border-white/20">
+              <div class="text-2xl mb-2">🚶</div>
+              <div class="font-semibold">Walk-ins Welcome</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center border border-white/20">
+              <div class="text-2xl mb-2">🎓</div>
+              <div class="font-semibold">All License Classes</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="space-y-6">
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+            <h3 class="text-2xl font-bold mb-4 flex items-center gap-3">
+              💳 Payment Options
+            </h3>
+            <p class="text-slate-300 mb-4">$15 exam fee goes directly to ARRL</p>
+            <p class="text-slate-300 text-sm mb-6">Choose your preferred payment method:</p>
+            <div class="grid grid-cols-1 gap-3">
+              <a href="https://cash.app/$KQ4DX" target="_blank" rel="noopener" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition flex items-center justify-center gap-3">
+                <i data-lucide="dollar-sign" class="w-5 h-5"></i>
+                Cash App
+              </a>
+              <a href="https://venmo.com/u/kq4dx" target="_blank" rel="noopener" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition flex items-center justify-center gap-3">
+                <i data-lucide="smartphone" class="w-5 h-5"></i>
+                Venmo
+              </a>
+              <a href="https://buy.stripe.com/3cIdR887747Q349dbI8Ra00" target="_blank" rel="noopener" class="bg-gray-700 hover:bg-gray-800 text-white px-6 py-3 rounded-lg font-semibold transition flex items-center justify-center gap-3">
+                <i data-lucide="credit-card" class="w-5 h-5"></i>
+                Credit Card (Stripe)
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="max-w-7xl mx-auto px-6 py-16">
+    <!-- FRN Information Section -->
+    <section class="mb-20">
+      <div class="bg-blue-50 border border-blue-200 rounded-2xl p-6">
+        <button id="frn-toggle" class="w-full flex items-center justify-between text-left">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+              <i data-lucide="info" class="w-6 h-6 text-blue-600"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-slate-900">Important: FCC Registration Required</h3>
+              <p class="text-slate-600 text-sm">Click to learn about FRN requirements (first-time test takers only)</p>
+            </div>
+          </div>
+          <div class="flex-shrink-0">
+            <i data-lucide="chevron-down" id="frn-chevron" class="w-6 h-6 text-slate-600 transition-transform"></i>
+          </div>
+        </button>
+        
+        <div id="frn-content" class="mt-6" style="display: none;">
+          <p class="text-slate-700 mb-4">
+            <strong>Before you register for an exam session</strong>, please make sure you have a valid FCC FRN (Federal Registration Number). 
+            If you are already licensed and testing for your upgrade, you can skip this step!
+          </p>
+          
+          <div class="bg-white rounded-xl p-6 mb-6 border border-blue-100">
+            <h4 class="font-semibold text-slate-900 mb-3">What is an FRN?</h4>
+            <p class="text-slate-600 mb-4">
+              The FRN (Federal Registration Number) is a unique 10-digit number assigned by the FCC that identifies you in their database. 
+              It's required for all amateur radio license applications and is free to obtain.
+            </p>
+            
+            <h4 class="font-semibold text-slate-900 mb-3">How to Get Your FRN:</h4>
+            <ol class="list-decimal list-inside text-slate-600 space-y-2 mb-4">
+              <li>Visit the FCC CORES website</li>
+              <li>Click "Register" to create a new account</li>
+              <li>Fill out your personal information accurately</li>
+              <li>Verify your email address</li>
+              <li>Your FRN will be assigned automatically</li>
+            </ol>
+            
+            <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
+              <p class="text-amber-800 text-sm">
+                <strong>Important:</strong> Use your legal name exactly as it appears on your government-issued ID. 
+                This information must match what you bring to the exam session.
+              </p>
+            </div>
+            
+            <a href="https://apps.fcc.gov/cores/userLogin.do" target="_blank" rel="noopener" class="btn-font inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition">
+              <i data-lucide="external-link" class="w-4 h-4"></i>
+              Get Your FRN at FCC CORES
+            </a>
+          </div>
+          
+          <div class="text-sm text-slate-600">
+            <strong>Already have an amateur radio license?</strong> You can skip the FRN registration since you already have one from your original license application.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- License Classes Section -->
+    <section class="mb-20">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-slate-900 mb-4">License Classes Offered</h2>
+        <p class="text-xl text-slate-600">All amateur radio license levels available</p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-slate-200 text-center">
+          <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center text-slate-600 text-4xl mx-auto mb-6 border-2 border-slate-200">
+            <i data-lucide="wrench" class="w-10 h-10"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">Technician</h3>
+          <p class="text-slate-600 mb-4">Entry-level license with VHF/UHF privileges and limited HF access</p>
+          <ul class="text-left text-slate-600 space-y-2">
+            <li class="flex items-center gap-2"><span class="text-amber-500">•</span> All VHF/UHF bands</li>
+            <li class="flex items-center gap-2"><span class="text-amber-500">•</span> 10m, 15m, 40m, 80m portions</li>
+            <li class="flex items-center gap-2"><span class="text-amber-500">•</span> Digital modes</li>
+            <li class="flex items-center gap-2"><span class="text-amber-500">•</span> Satellite operation</li>
+          </ul>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-slate-200 text-center">
+          <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center text-slate-600 text-4xl mx-auto mb-6 border-2 border-slate-200">
+            <i data-lucide="medal" class="w-10 h-10"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">General</h3>
+          <p class="text-slate-600 mb-4">Expanded HF privileges for worldwide communication</p>
+          <ul class="text-left text-slate-600 space-y-2">
+            <li class="flex items-center gap-2"><span class="text-amber-500">•</span> Most HF band segments</li>
+            <li class="flex items-center gap-2"><span class="text-amber-500">•</span> DX communication</li>
+            <li class="flex items-center gap-2"><span class="text-amber-500">•</span> Phone privileges</li>
+            <li class="flex items-center gap-2"><span class="text-amber-500">•</span> CW and digital modes</li>
+          </ul>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-slate-200 text-center">
+          <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center text-slate-600 text-4xl mx-auto mb-6 border-2 border-slate-200">
+            <i data-lucide="zap" class="w-10 h-10"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">Amateur Extra</h3>
+          <p class="text-slate-600 mb-4">Full amateur radio privileges on all bands</p>
+          <ul class="text-left text-slate-600 space-y-2">
+            <li class="flex items-center gap-2"><span class="text-amber-500">•</span> Complete HF access</li>
+            <li class="flex items-center gap-2"><span class="text-amber-500">•</span> Exclusive band segments</li>
+            <li class="flex items-center gap-2"><span class="text-amber-500">•</span> VE examination privileges</li>
+            <li class="flex items-center gap-2"><span class="text-amber-500">•</span> Maximum power levels</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how" class="mb-20">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-slate-900 mb-4">How It Works</h2>
+        <p class="text-xl text-slate-600">Simple steps to get your amateur radio license</p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-slate-200 text-center">
+          <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center text-slate-600 text-3xl mx-auto mb-6 border-2 border-slate-200">
+            <i data-lucide="calendar" class="w-10 h-10"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-3">Schedule Your Exam</h3>
+          <p class="text-slate-600">Send us an email or message to schedule your preferred exam date and time.</p>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-slate-200 text-center">
+          <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center text-slate-600 text-3xl mx-auto mb-6 border-2 border-slate-200">
+            <i data-lucide="banknote" class="w-10 h-10"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-3">Pay & Prepare</h3>
+          <p class="text-slate-600">Pay the $15 exam fee using your preferred method and review your study materials.</p>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-slate-200 text-center">
+          <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center text-slate-600 text-3xl mx-auto mb-6 border-2 border-slate-200">
+            <i data-lucide="clipboard-check" class="w-10 h-10"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-3">Take Your Exam</h3>
+          <p class="text-slate-600">Arrive with valid ID, take your exam, and receive your results the same day!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="mb-20">
+      <div class="bg-gradient-to-r from-slate-900 to-slate-800 rounded-3xl p-12 text-white">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 class="text-4xl font-bold mb-6">Transparent Pricing</h2>
+            <div class="text-6xl font-bold text-amber-400 mb-4">$15</div>
+            <p class="text-xl text-slate-300 mb-8">
+              Per exam session - fee goes directly to ARRL. No hidden costs, just professional testing at an affordable price.
+            </p>
+            <ul class="space-y-3 text-lg">
+              <li class="flex items-center gap-3">
+                <span class="text-green-400">✓</span>
+                All license classes (Technician, General, Extra)
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="text-green-400">✓</span>
+                Same-day results
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="text-green-400">✓</span>
+                Experienced Volunteer Examiners
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="text-green-400">✓</span>
+                Comfortable testing environment
+              </li>
+            </ul>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+            <h3 class="text-2xl font-bold mb-6 text-center">Ready to Get Licensed?</h3>
+            <a id="schedule" href="mailto:kq4dx12@gmail.com?subject=Schedule%20Amateur%20Radio%20Exam" class="block w-full bg-gradient-to-r from-amber-500 to-orange-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-amber-600 hover:to-orange-700 transition text-center text-lg flex items-center justify-center gap-3">
+              📧 Email to Schedule
+            </a>
+            <p class="text-center text-slate-300 mt-4">Or join our Facebook group for updates</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Study Resources & Community Section -->
+    <section class="mb-20">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl p-8 border border-blue-200">
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">Study Resources</h3>
+          <p class="text-slate-700 mb-6">Get the best preparation for your amateur radio exam with HamStudy - the most popular online study tool.</p>
+          <div class="space-y-4">
+            <a href="https://hamstudy.org" target="_blank" rel="noopener" class="block bg-white hover:bg-gray-50 px-6 py-4 rounded-xl border border-blue-200 transition group">
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="font-semibold text-slate-900 group-hover:text-blue-600">HamStudy.org</div>
+                  <div class="text-sm text-slate-600">Free online practice exams</div>
+                </div>
+                <span class="text-blue-600 group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+            </a>
+            <div class="text-sm text-slate-600">
+              <strong>Pro tip:</strong> Practice until you're consistently scoring 80% or higher!
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-gradient-to-br from-indigo-50 to-purple-100 rounded-2xl p-8 border border-indigo-200">
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">Community Support</h3>
+          <p class="text-slate-700 mb-6">Join our Facebook group for study tips, exam schedules, and help from experienced hams in the community.</p>
+          <a href="https://www.facebook.com/groups/dxexams" target="_blank" rel="noopener" class="inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-700 px-6 py-4 rounded-xl font-semibold transition text-white">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+            Join Facebook Group
+          </a>
+          <div class="mt-4 text-slate-600 text-sm">
+            Get answers to your questions and connect with local hams!
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- User Reviews Section -->
+    <section class="mb-20">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-slate-900 mb-4">What Our Test Takers Say</h2>
+        <p class="text-xl text-slate-600">Real experiences from recently licensed amateurs</p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-2xl p-8 shadow-lg border border-slate-200">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+              M
+            </div>
+            <div>
+              <h4 class="font-bold text-slate-900">Mike K.</h4>
+              <div class="flex items-center gap-1">
+                <span class="text-amber-400">★★★★★</span>
+                <span class="text-sm text-slate-600">5/5</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-slate-600 mb-4">
+            "Great experience! KQ4DX made the whole process smooth and stress-free. 
+            Passed my Technician exam on the first try. Very professional and helpful throughout."
+          </p>
+          <div class="text-sm text-slate-500">New Technician License • 2 weeks ago</div>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-8 shadow-lg border border-slate-200">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+              S
+            </div>
+            <div>
+              <h4 class="font-bold text-slate-900">Sarah T.</h4>
+              <div class="flex items-center gap-1">
+                <span class="text-amber-400">★★★★★</span>
+                <span class="text-sm text-slate-600">5/5</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-slate-600 mb-4">
+            "Upgraded from Technician to General with no issues. The exam session was well-organized, 
+            and the VE team was knowledgeable and friendly. Highly recommend!"
+          </p>
+          <div class="text-sm text-slate-500">General Class Upgrade • 1 month ago</div>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-8 shadow-lg border border-slate-200">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+              D
+            </div>
+            <div>
+              <h4 class="font-bold text-slate-900">David R.</h4>
+              <div class="flex items-center gap-1">
+                <span class="text-amber-400">★★★★★</span>
+                <span class="text-sm text-slate-600">5/5</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-slate-600 mb-4">
+            "Excellent service! Clear instructions, fair pricing, and got my results immediately. 
+            The whole process from registration to getting my Extra license was seamless."
+          </p>
+          <div class="text-sm text-slate-500">Amateur Extra License • 3 weeks ago</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hidden Radio Access Section -->
+    <section class="mb-20">
+      <div class="text-center">
+        <p class="text-slate-600 text-sm">Need help or have questions? Check out our Facebook community!</p>
+        <a href="https://www.facebook.com/groups/dxexams" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition mt-4">
+          <i data-lucide="facebook" class="w-4 h-4"></i>
+          Join Facebook Group
+        </a>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="mb-20">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-slate-900 mb-4">Get Connected</h2>
+        <p class="text-xl text-slate-600">Join our community and stay updated</p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-2xl p-8 shadow-lg border border-slate-200">
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">Contact Information</h3>
+          <div class="space-y-4">
+            <a href="mailto:kq4dx12@gmail.com" class="flex items-center gap-3 text-lg text-slate-700 hover:text-blue-600 transition">
+              <i data-lucide="mail" class="w-6 h-6"></i>
+              kq4dx12@gmail.com
+            </a>
+            <a href="https://www.facebook.com/groups/dxexams" target="_blank" rel="noopener" class="flex items-center gap-3 text-lg text-slate-700 hover:text-blue-600 transition">
+              <i data-lucide="facebook" class="w-6 h-6"></i>
+              Facebook Group
+            </a>
+          </div>
+        </div>
+        
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-200">
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">Quick Payment Links</h3>
+          <div class="space-y-3">
+            <a href="https://cash.app/$KQ4DX" target="_blank" rel="noopener" class="block bg-white hover:bg-gray-50 px-4 py-3 rounded-lg transition border border-gray-200 flex items-center gap-3">
+              <div class="w-8 h-8 bg-green-600 rounded flex items-center justify-center">
+                <i data-lucide="dollar-sign" class="w-5 h-5 text-white"></i>
+              </div>
+              <span class="font-medium">Cash App - $KQ4DX</span>
+            </a>
+            <a href="https://venmo.com/u/kq4dx" target="_blank" rel="noopener" class="block bg-white hover:bg-gray-50 px-4 py-3 rounded-lg transition border border-gray-200 flex items-center gap-3">
+              <div class="w-8 h-8 bg-blue-500 rounded flex items-center justify-center">
+                <i data-lucide="smartphone" class="w-5 h-5 text-white"></i>
+              </div>
+              <span class="font-medium">Venmo - @kq4dx</span>
+            </a>
+            <a href="https://buy.stripe.com/3cIdR887747Q349dbI8Ra00" target="_blank" rel="noopener" class="block bg-white hover:bg-gray-50 px-4 py-3 rounded-lg transition border border-gray-200 flex items-center gap-3">
+              <div class="w-8 h-8 bg-purple-600 rounded flex items-center justify-center">
+                <i data-lucide="credit-card" class="w-5 h-5 text-white"></i>
+              </div>
+              <span class="font-medium">Credit Card (Stripe)</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center">
+        <div class="flex items-center justify-center gap-3 mb-4">
+          <span class="text-3xl">📻</span>
+          <div>
+            <span class="text-2xl font-bold">DX Exams</span>
+            <div class="text-amber-400 text-lg font-medium">KQ4DX</div>
+          </div>
+        </div>
+        <p class="text-slate-400 mb-6">Professional Amateur Radio License Testing</p>
+        <div class="flex flex-wrap justify-center gap-6 mb-8">
+          <a href="mailto:kq4dx12@gmail.com" class="text-slate-300 hover:text-white transition">Email</a>
+          <a href="https://www.facebook.com/groups/dxexams" target="_blank" rel="noopener" class="text-slate-300 hover:text-white transition">Facebook</a>
+          <a href="#how" class="text-slate-300 hover:text-white transition">How It Works</a>
+          <a href="#pricing" class="text-slate-300 hover:text-white transition">Pricing</a>
+        </div>
+        <p class="text-slate-500 text-sm">© 2025 DX Amateur Radio Exams. Built with care for the ham radio community.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Radio Access Modal -->
+  <div id="radio-access-modal" class="modal">
+    <div class="modal-content">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-2xl font-bold text-slate-900">Remote Exam Session Access</h3>
+        <button id="close-radio-modal" class="text-slate-400 hover:text-slate-600 transition">
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+      </div>
+      
+      <div class="space-y-6 mb-6">
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <i data-lucide="video" class="w-6 h-6 text-blue-600"></i>
+            <h4 class="font-semibold text-slate-900">Step 1: Join Zoom Meeting</h4>
+          </div>
+          <p class="text-slate-600 mb-4">
+            Connect to the exam session via Zoom for identity verification and proctoring.
+          </p>
+          <a href="https://zoom.us/j/1234567890" target="_blank" rel="noopener" class="btn-font inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition">
+            <i data-lucide="external-link" class="w-4 h-4"></i>
+            Join Zoom Meeting
+          </a>
+        </div>
+        
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <i data-lucide="clipboard-check" class="w-6 h-6 text-amber-600"></i>
+            <h4 class="font-semibold text-slate-900">Step 2: Take Your Exam</h4>
+          </div>
+          <p class="text-slate-600 mb-4">
+            <strong>Important:</strong> Only click this button when you're on the Zoom call and the VE team gives you permission to start.
+          </p>
+          <button id="join-exam-btn" class="btn-font inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white px-6 py-3 rounded-lg transition">
+            <i data-lucide="external-link" class="w-4 h-4"></i>
+            Join Exam (After Zoom Check-in)
+          </button>
+        </div>
+      </div>
+      
+      <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
+        <p class="text-slate-600 text-sm">
+          <strong>Exam Day Checklist:</strong> Have your photo ID ready, ensure good lighting for identity verification, 
+          and test your camera/microphone before joining.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Join Exam Confirmation Modal -->
+  <div id="join-exam-modal" class="modal">
+    <div class="modal-content">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-2xl font-bold text-slate-900">Confirm Exam Access</h3>
+        <button id="close-join-modal" class="text-slate-400 hover:text-slate-600 transition">
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+      </div>
+      
+      <div class="space-y-4 mb-6">
+        <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+          <div class="flex items-center gap-2 mb-2">
+            <i data-lucide="alert-triangle" class="w-5 h-5 text-red-600"></i>
+            <span class="font-semibold text-red-900">Important Verification</span>
+          </div>
+          <p class="text-red-700 text-sm">
+            You should only proceed if you have already joined the Zoom call and received permission from the VE team to begin your exam.
+          </p>
+        </div>
+        
+        <div class="space-y-3">
+          <label class="flex items-center gap-3">
+            <input type="checkbox" id="zoom-check" class="w-4 h-4 text-amber-600 rounded">
+            <span class="text-slate-700">I am currently on the Zoom call with the VE team</span>
+          </label>
+          <label class="flex items-center gap-3">
+            <input type="checkbox" id="permission-check" class="w-4 h-4 text-amber-600 rounded">
+            <span class="text-slate-700">I have received permission to start my exam</span>
+          </label>
+          <label class="flex items-center gap-3">
+            <input type="checkbox" id="id-check" class="w-4 h-4 text-amber-600 rounded">
+            <span class="text-slate-700">My identity has been verified by the VEs</span>
+          </label>
+        </div>
+      </div>
+      
+      <div class="flex gap-3">
+        <a id="proceed-exam" href="https://exam.tools" target="_blank" rel="noopener" class="btn-font flex-1 bg-gradient-to-r from-amber-500 to-orange-600 text-white px-6 py-3 rounded-lg hover:from-amber-600 hover:to-orange-700 transition text-center opacity-50 cursor-not-allowed">
+          Proceed to Exam.Tools
+        </a>
+        <button id="cancel-exam" class="btn-font px-6 py-3 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Schedule Registration Modal -->
+  <div id="schedule-modal" class="modal">
+    <div class="modal-content">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-2xl font-bold text-slate-900">How to Register for Exam Session</h3>
+        <button id="close-modal" class="text-slate-400 hover:text-slate-600 transition">
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+      </div>
+      
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <span class="text-amber-600 font-semibold text-sm">1</span>
+          </div>
+          <div>
+            <h4 class="font-semibold text-slate-900 mb-1">Create HamStudy Account</h4>
+            <p class="text-slate-600 text-sm">If you don't have one already, you'll need to create a free account on HamStudy.org</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <span class="text-amber-600 font-semibold text-sm">2</span>
+          </div>
+          <div>
+            <h4 class="font-semibold text-slate-900 mb-1">Find KQ4DX Sessions</h4>
+            <p class="text-slate-600 text-sm">Look for available exam sessions hosted by KQ4DX in your area</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <span class="text-amber-600 font-semibold text-sm">3</span>
+          </div>
+          <div>
+            <h4 class="font-semibold text-slate-900 mb-1">Register for Session</h4>
+            <p class="text-slate-600 text-sm">Click on your preferred session and complete the registration form</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <span class="text-amber-600 font-semibold text-sm">4</span>
+          </div>
+          <div>
+            <h4 class="font-semibold text-slate-900 mb-1">Bring Required Items</h4>
+            <p class="text-slate-600 text-sm">Bring valid photo ID, FRN number (if first license), and $15 exam fee</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+        <p class="text-blue-800 text-sm">
+          <strong>Remember:</strong> Make sure you have your FCC FRN number ready before registering (unless you're already licensed and upgrading).
+        </p>
+      </div>
+      
+      <div class="flex gap-3">
+        <a href="https://hamstudy.org/sessions/KQ4DX/all" target="_blank" rel="noopener" class="btn-font flex-1 bg-gradient-to-r from-amber-500 to-orange-600 text-white px-6 py-3 rounded-lg hover:from-amber-600 hover:to-orange-700 transition text-center">
+          Go to HamStudy Sessions
+        </a>
+        <button id="close-modal-btn" class="btn-font px-6 py-3 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // FRN toggle functionality
+    const frnToggle = document.getElementById('frn-toggle');
+    const frnContent = document.getElementById('frn-content');
+    const frnChevron = document.getElementById('frn-chevron');
+
+    frnToggle.addEventListener('click', function() {
+      const isHidden = frnContent.style.display === 'none';
+      
+      if (isHidden) {
+        frnContent.style.display = 'block';
+        frnChevron.style.transform = 'rotate(180deg)';
+      } else {
+        frnContent.style.display = 'none';
+        frnChevron.style.transform = 'rotate(0deg)';
+      }
+      
+      // Re-initialize icons after content change
+      lucide.createIcons();
+    });
+
+    // Radio access modal functionality
+    const headerRadioBtn = document.getElementById('header-radio-btn');
+    const mobileRadioBtn = document.getElementById('mobile-radio-btn');
+    const radioAccessModal = document.getElementById('radio-access-modal');
+    const closeRadioModal = document.getElementById('close-radio-modal');
+    const joinExamBtn = document.getElementById('join-exam-btn');
+    const joinExamModal = document.getElementById('join-exam-modal');
+    const closeJoinModal = document.getElementById('close-join-modal');
+    const cancelExam = document.getElementById('cancel-exam');
+    const proceedExam = document.getElementById('proceed-exam');
+    const zoomCheck = document.getElementById('zoom-check');
+    const permissionCheck = document.getElementById('permission-check');
+    const idCheck = document.getElementById('id-check');
+
+    function openRadioModal() {
+      radioAccessModal.classList.add('active');
+      lucide.createIcons();
+    }
+
+    headerRadioBtn.addEventListener('click', openRadioModal);
+    mobileRadioBtn.addEventListener('click', openRadioModal);
+
+    closeRadioModal.addEventListener('click', function() {
+      radioAccessModal.classList.remove('active');
+    });
+
+    joinExamBtn.addEventListener('click', function() {
+      radioAccessModal.classList.remove('active');
+      joinExamModal.classList.add('active');
+      lucide.createIcons();
+    });
+
+    closeJoinModal.addEventListener('click', function() {
+      joinExamModal.classList.remove('active');
+    });
+
+    cancelExam.addEventListener('click', function() {
+      joinExamModal.classList.remove('active');
+    });
+
+    // Enable/disable proceed button based on checkboxes
+    function updateProceedButton() {
+      const allChecked = zoomCheck.checked && permissionCheck.checked && idCheck.checked;
+      if (allChecked) {
+        proceedExam.classList.remove('opacity-50', 'cursor-not-allowed');
+        proceedExam.classList.add('cursor-pointer');
+      } else {
+        proceedExam.classList.add('opacity-50', 'cursor-not-allowed');
+        proceedExam.classList.remove('cursor-pointer');
+      }
+    }
+
+    zoomCheck.addEventListener('change', updateProceedButton);
+    permissionCheck.addEventListener('change', updateProceedButton);
+    idCheck.addEventListener('change', updateProceedButton);
+
+    // Close modals when clicking outside
+    radioAccessModal.addEventListener('click', function(e) {
+      if (e.target === radioAccessModal) {
+        radioAccessModal.classList.remove('active');
+      }
+    });
+
+    joinExamModal.addEventListener('click', function(e) {
+      if (e.target === joinExamModal) {
+        joinExamModal.classList.remove('active');
+      }
+    });
+
+    // Schedule modal functionality
+    const scheduleBtn = document.getElementById('schedule-btn');
+    const scheduleModal = document.getElementById('schedule-modal');
+    const closeModal = document.getElementById('close-modal');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+
+    scheduleBtn.addEventListener('click', function() {
+      scheduleModal.classList.add('active');
+      lucide.createIcons(); // Re-initialize icons in modal
+    });
+
+    closeModal.addEventListener('click', function() {
+      scheduleModal.classList.remove('active');
+    });
+
+    closeModalBtn.addEventListener('click', function() {
+      scheduleModal.classList.remove('active');
+    });
+
+    // Close modal when clicking outside
+    scheduleModal.addEventListener('click', function(e) {
+      if (e.target === scheduleModal) {
+        scheduleModal.classList.remove('active');
+      }
+    });
+
+    // Mobile menu toggle
+    document.getElementById('mobile-toggle').addEventListener('click', function() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('active');
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('mobile-menu');
+      const toggle = document.getElementById('mobile-toggle');
+      if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+        menu.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>
